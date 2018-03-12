@@ -118,7 +118,11 @@ def main(args):
             pass
     finally:
         kg = KCacheGrind(prof)
-        kg.output(file(options.outfile, 'wb'))
+        try:
+            out_file = open(options.outfile, 'w', encoding='utf-8') 
+        except TypeError:
+            out_file = open(options.outfile, 'w') 
+        kg.output(out_file)
 
 if __name__ == '__main__':
     sys.exit(main(sys.argv))
